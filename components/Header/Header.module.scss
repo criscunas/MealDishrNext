@@ -1,0 +1,23 @@
+.header {
+  background-color:#1A5276;
+  padding: 1.5rem 0;
+  &__nav {
+    
+  }
+
+  &__title {
+    color: white;
+    text-align: center;
+    padding-bottom: 1rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  &__combo {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 0 1.5rem;
+  }
+
+}
