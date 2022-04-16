@@ -2,6 +2,7 @@ import Header from '../components/Header/Header';
 import Main from '../components/Main/Main';
 import Head from 'next/head';
 import FoodData from '../data.json';
+import { useRouter } from 'next/router';
 
 
 const getIngredients = (data) => {
@@ -31,33 +32,33 @@ const getIngredients = (data) => {
   return iList;
 };
 
-const getAll = async () => {
-  let data = FoodData;
-  const allMeals = data.map(async (meal) => {
-    const res = await fetch(
-      `https://www.themealdb.com/api/json/v1/1/search.php?s=${meal}`
-    );
-    return res.json();
-  });
-  return await Promise.all(allMeals)
-}
+// const getAll = async () => {
+//   let data = FoodData;
+//   const allMeals = data.map(async (meal) => {
+//     const res = await fetch(
+//       `https://www.themealdb.com/api/json/v1/1/search.php?s=${meal}`
+//     );
+//     return res.json();
+//   });
+//   return await Promise.all(allMeals)
+// }
 
-export async function getStaticPaths () {
-  const all = await getAll()
+// export async function getStaticPaths () {
+//   const all = await getAll()
 
-  const paths = all.map((ele) => {
-    return {
-      params: {meal: ele.meals[0].strMeal}
-    }
-  })
+//   const paths = all.map((ele) => {
+//     return {
+//       params: {meal: ele.meals[0].strMeal}
+//     }
+//   })
 
-  return {
-    paths,
-    fallback:false
-  }
-}
+//   return {
+//     paths,
+//     fallback:false
+//   }
+// }
 
-export const getStaticProps = async (context) => {
+export const getServerSideProps = async (context) => {
   const mealName = context.params.meal;
   
   const res = await fetch(
@@ -84,7 +85,6 @@ export default function Meal ({data, ingredients}) {
         <title> {data.meals[0].strMeal} </title>
       </Head>
       <Header />
-      
       <Main meal={data} ingredients={ingredients} />
     </>
   );
