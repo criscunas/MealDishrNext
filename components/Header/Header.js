@@ -1,4 +1,4 @@
-import {AppBar, Container, Box, TextField, Button, InputAdornment} from "@material-ui/core";
+import {AppBar, Container, Box, TextField, Button} from "@material-ui/core";
 import FoodData from '../../data.json';
 import Autocomplete from "@mui/material/Autocomplete";
 import headerStyles from './Header.module.scss';
