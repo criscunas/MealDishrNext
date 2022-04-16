@@ -5,7 +5,6 @@ import { ThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import theme from "./theme";
 import "../styles/globals.css";
-import Header from "../components/Header/Header";
 
 export default function MyApp(props) {
   const { Component, pageProps } = props;
@@ -25,11 +24,10 @@ export default function MyApp(props) {
           name="viewport"
           content="minimum-scale=1, initial-scale=1, width=device-width"
         />
+        
       </Head>
       <ThemeProvider theme={theme}>
-      
         <CssBaseline />
-
         <Component {...pageProps} />
       </ThemeProvider>
     </React.Fragment>
