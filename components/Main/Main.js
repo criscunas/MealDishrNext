@@ -28,7 +28,7 @@ export default function Main (props) {
             <TableBody>
               {ingredients.map((ing, i) => {
                 return (
-                  <TableRow key={ing.name}>
+                  <TableRow key={i}>
                     <TableCell align="left" style ={{display:"flex", gap: "0.5rem"}}> <p className={mainStyles.main__table__rows} > <span> {ing.amount}</span> {ing.name} </p> </TableCell>
                   </TableRow>
                 );
@@ -52,7 +52,7 @@ export default function Main (props) {
             </h1>
             {meal.meals[0].strInstructions.split("\\r\\n").map((ele, i) => {
               return (
-                <p className={mainStyles.main__instruction__text}> {ele}</p>
+                <p key={i} className={mainStyles.main__instruction__text}> {ele}</p>
               );
             })}
           </div>
