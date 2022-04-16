@@ -3,6 +3,7 @@ import Main from '../components/Main/Main';
 import Head from 'next/head';
 import FoodData from '../data.json';
 
+
 const getIngredients = (data) => {
   let iList = [];
 
@@ -83,7 +84,7 @@ export default function Meal ({data, ingredients}) {
         <title> {data.meals[0].strMeal} </title>
       </Head>
       <Header />
-      <h1> {data.meals[0].strMeal} </h1>
+      
       <Main meal={data} ingredients={ingredients} />
     </>
   );
