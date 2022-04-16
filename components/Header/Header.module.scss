@@ -1,23 +1,53 @@
+@use '../../styles/mixins.scss' as *;
+
 .header {
   background-color:#1A5276;
   padding: 1.5rem 0;
+
   &__nav {
+  
+    @include tablet {
+      display: flex;
+    }
     
+  }
+
+  &__search {
+    display: flex;
+    flex: 1;
+    align-items: center;
+
+    justify-content: center;
+    gap: 0.5rem;
+
+    @include tablet {
+      display: flex;
+      justify-content: flex-end;
+    }
   }
 
   &__title {
     color: white;
     text-align: center;
-    padding-bottom: 1rem;
-    font-size: 1.5rem;
+    padding-bottom: 1.5rem;
+    font-size: 2rem;
     font-weight: bold;
+    flex: 1;
+    font-family: 'Lobster', cursive;
+    cursor: pointer;
+
+    @include tablet {
+      padding: 0;
+      text-align: initial;
+    }
   }
 
-  &__combo {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    padding: 0 1.5rem;
+  &__button {
+    height:28px;
   }
 
+  input {
+    margin-left: 0.5rem;  
+    cursor: pointer;
+  }
 }
