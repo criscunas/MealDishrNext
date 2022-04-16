@@ -1,54 +1,37 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import Head from 'next/head';
+import Link from 'next/link';
+import { useRouter } from "next/router";
+import styles from '../styles/Home.module.scss'
 import Header from '../components/Header/Header';
-import Main from '../components/Main/Main';
+import ShuffleIcon from "@mui/icons-material/Shuffle";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import Data from '../data.json';
 
-const getIngredients = (data) => {
-    let iList = [];
+import {
+  Container,
+  Box,
+  CssBaseline,
+  Button
+} from "@material-ui/core";
 
-    let ingredients = [];
-    let measures = [];
+export default function Home() {
 
-    Object.keys(data)
-      .map((key) => data[key])
-      .slice(9, 29)
-      .forEach((item, index) => {
-        if (item) {
-          ingredients.push(item);
-          measures.push(
-            Object.keys(data)
-              .map((key) => data[key])
-              .slice(29, 49)[index]
-          );
-        }
-      });
+  const router = useRouter();
 
-    ingredients.forEach((item, i) => {
-      iList.push({ name: ingredients[i], amount: measures[i] });
-    });
-
-    return iList;
-  };
-
-export async function getStaticProps() {
-  
-  const res = await fetch("https://www.themealdb.com/api/json/v1/1/search.php?s=Apple%20Frangipan%20Tart");
-
-  const Meal = await res.json()
-  
-  const ingredients = getIngredients(Meal.meals[0])
-
-  const firstMeal = Meal.meals[0]
-
-  return {
-    props: {
-      firstMeal,
-      ingredients
-    },
+  const getRandomMeal = () => {
+    let num = Math.floor(Math.random() * Data.length);
+    let randomMeal = Data[num]
+    router.push(`/${randomMeal}`)
   }
-}
 
-export default function Home({firstMeal, ingredients}) {
+  const navigateGithub = () => {
+    router.push("https://github.com/criscunas");
+  }
+
+  const navigateLinkedIn = () => {
+    router.push("https://www.linkedin.com/in/cristophercunas/");
+  }
 
   return (
     <div>
@@ -58,7 +41,19 @@ export default function Home({firstMeal, ingredients}) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header/>
-      <Main meal = {firstMeal} ingredients = {ingredients} />
+      <CssBaseline/>
+      <Container maxWidth = "xl">
+        <Box style={{height: "90vh", textAlign: "center"}}>
+          <h1 className={styles.home__header} > Welcome to MealDishr </h1>
+            <p className={styles.home__description} > Select a meal above to get started or click below for a random meal ! </p>
+            <Button onClick = {() => {getRandomMeal()}} endIcon = {<ShuffleIcon/>} style = {{backgroundColor: "#1A5276", color:"#fff"}} variant='contained' size ="medium"> Random </Button>
+            <p className={styles.home__caption} >Built using <Link href = "https://www.themealdb.com/api.php"> The Meal DB </Link> </p>
+            <div className = {styles.home__icons}>
+              <p onClick = {()=> {navigateGithub()}} > <GitHubIcon htmlColor='#1A5276' fontSize='large' /> </p>
+              <p onClick={()=>{navigateLinkedIn()}} > <LinkedInIcon htmlColor='#1A5276' fontSize='large' /> </p>
+            </div>
+        </Box>
+      </Container>
     </div>
   )
 }
