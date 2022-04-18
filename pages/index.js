@@ -26,7 +26,7 @@ export default function Home() {
   }
 
   const navigateGithub = () => {
-    router.push("https://github.com/criscunas");
+    router.push("https://github.com/criscunas/MealDishrNext");
   }
 
   const navigateLinkedIn = () => {
